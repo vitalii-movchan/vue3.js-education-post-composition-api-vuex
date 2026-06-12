@@ -1,6 +1,7 @@
 <script>
 import {computed} from "vue";
 import {useStore} from "vuex";
+import {useChangePageHook} from "@/hooks/PostList/Page/Event/useChangePageHook";
 
 export default {
   name: "post-pagination",
@@ -13,14 +14,12 @@ export default {
     const pages = computed(() => store.state.post_list.pagination.pages);
 
     // 3. Methods to trigger Mutations and Actions
-    const changePage = (page) => {
-      store.dispatch('post_list/changePage', page, {root: true}) // Dispatches an action
-    }
+    const {useChangePage} = useChangePageHook(store);
 
     return {
       current_page,
       pages,
-      changePage
+      useChangePage
     }
   }
 }
@@ -34,7 +33,7 @@ export default {
         :key="page"
         class="page"
         :class="{'current-page': page === current_page}"
-        @click="changePage(page)"
+        @click="useChangePage(page)"
     >
       {{ page }}
     </div>

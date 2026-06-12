@@ -8,7 +8,7 @@ import {PostListPagination} from "@/store/modules/PostList/PostListPagination";
 import {PostListItem} from "@/store/modules/PostList/PostListItem";
 
 import {useScrollPageHook} from "@/hooks/PostList/Page/Event/useScrollPageHook";
-import {useChangePage} from "@/hooks/PostList/Page/Event/useChangePage";
+import {useChangePageHook} from "@/hooks/PostList/Page/Event/useChangePageHook";
 
 export const PostList = {
     modules: {
@@ -63,10 +63,6 @@ export const PostList = {
                     _limit: state.pagination.limit
                 }
             });
-        },
-        async changePage({commit, dispatch}, page) {
-            // 1. Initialize the store change post list page hook instance
-            await useChangePage({commit, dispatch}, page);
         },
     },
     namespaced: true
