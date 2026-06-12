@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function usePosts({state}) {
+export async function useFetch({state}) {
     return await axios.get('https://jsonplaceholder.typicode.com/posts', {
         params: {
             _page: state.pagination.page,
