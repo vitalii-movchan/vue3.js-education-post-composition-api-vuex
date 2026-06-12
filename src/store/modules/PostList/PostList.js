@@ -61,21 +61,22 @@ export const PostList = {
     },
     actions: {
         async fetchPosts({state}) {
+            // 1. Initialize the store post list hook instance
             return usePosts(state.pagination.page, state.pagination.limit);
         },
         async loadPage({state, commit, dispatch}) {
-            // 1. Initialize the store post list hook instance
+            // 1. Initialize the store post list page hook instance
             await usePage({commit, dispatch});
 
-            // 2. Initialize the store post pagination hook instance
+            // 2. Initialize the store post list pagination hook instance
             usePagination({state, commit});
         },
         async changePage({commit, dispatch}, page) {
-            // 1. Initialize the store change page hook instance
+            // 1. Initialize the store change post list page hook instance
             await useChangePage({commit, dispatch}, page);
         },
         async scrollPage({getters, commit, dispatch}) {
-            // 1. Initialize the store scroll page hook instance
+            // 1. Initialize the store scroll post list page hook instance
             await useScrollPage({getters, commit, dispatch});
         },
     },
