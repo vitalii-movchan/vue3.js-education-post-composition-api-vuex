@@ -7,8 +7,8 @@ import {PostListPagination} from "@/store/modules/PostList/PostListPagination";
 import {PostListItem} from "@/store/modules/PostList/PostListItem";
 
 import {usePosts} from "@/hooks/PostList/usePosts";
-import {usePage} from "@/hooks/PostList/Page/usePage";
-import {usePagination} from "@/hooks/PostList/Page/usePagination";
+import {usePageHook} from "@/hooks/PostList/Page/usePageHook";
+import {usePaginationHook} from "@/hooks/PostList/Page/usePaginationHook";
 
 import {useScrollPage} from "@/hooks/PostList/Page/Event/useScrollPage";
 import {useChangePage} from "@/hooks/PostList/Page/Event/useChangePage";
@@ -65,10 +65,10 @@ export const PostList = {
         },
         async loadPage({state, commit, dispatch}) {
             // 1. Initialize the store post list page hook instance
-            await usePage({commit, dispatch});
+            await usePageHook({commit, dispatch});
 
             // 2. Initialize the store post list pagination hook instance
-            usePagination({state, commit});
+            usePaginationHook({state, commit});
         },
         async changePage({commit, dispatch}, page) {
             // 1. Initialize the store change post list page hook instance

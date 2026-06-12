@@ -4,6 +4,7 @@ import {useStore} from "vuex";
 
 import PostToolbar from "@/components/PostList/Toolbar/PostToolbar.vue";
 import PostContent from "@/components/PostList/Content/PostContent.vue";
+import {useLoadPageHook} from "@/hooks/PostList/Page/Event/useLoadPageHook";
 
 
 export default {
@@ -16,7 +17,9 @@ export default {
     const store = useStore()
 
     // 2. Methods to trigger Mutations and Actions
-    store.dispatch('post_list/loadPage', {}, {}, {root: true});
+    const {useLoadPage} = useLoadPageHook(store);
+
+    useLoadPage();
   },
 }
 
