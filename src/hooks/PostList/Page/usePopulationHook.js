@@ -1,5 +1,5 @@
-export function usePageHook(store) {
-    const usePage = async () => {
+export function usePopulationHook(store) {
+    const usePopulation = async () => {
         store.commit('post_list/settings/setLoading', true, {root: true});
 
         try {
@@ -15,6 +15,6 @@ export function usePageHook(store) {
     };
 
     return {
-        usePage
+        usePopulation
     }
 }

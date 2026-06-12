@@ -1,13 +1,13 @@
 import {usePaginationHook} from "@/hooks/PostList/Page/usePaginationHook";
-import {usePageHook} from "@/hooks/PostList/Page/usePageHook";
+import {usePopulationHook} from "@/hooks/PostList/Page/usePopulationHook";
 
 export function useLoadPageHook(store) {
     const useLoadPage = async () => {
         // Send store state as an argument to the hook
-        const {usePage} = usePageHook(store);
+        const {usePopulation} = usePopulationHook(store);
         const {usePagination} = usePaginationHook(store);
 
-        await usePage();
+        await usePopulation();
         usePagination();
     }
 
