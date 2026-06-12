@@ -6,7 +6,7 @@ import {PostListSort} from "@/store/modules/PostList/PostListSort";
 import {PostListPagination} from "@/store/modules/PostList/PostListPagination";
 import {PostListItem} from "@/store/modules/PostList/PostListItem";
 
-import {useFetch} from "@/hooks/PostList/Page/useFetch";
+import {usePosts} from "@/hooks/PostList/usePosts";
 import {usePage} from "@/hooks/PostList/Page/usePage";
 import {usePagination} from "@/hooks/PostList/Page/usePagination";
 
@@ -61,7 +61,7 @@ export const PostList = {
     actions: {
         async fetchPosts({state}) {
             // 1. Initialize the store post list hook instance
-            return useFetch({state});
+            return usePosts(state.pagination.page, state.pagination.limit);
         },
         async loadPage({state, commit, dispatch}) {
             // 1. Initialize the store post list page hook instance
