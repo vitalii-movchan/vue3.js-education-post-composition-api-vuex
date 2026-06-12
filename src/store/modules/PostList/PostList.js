@@ -1,4 +1,5 @@
 // store/modules/PostModule.js
+import axios from "axios";
 
 import {PostListSettings} from "@/store/modules/PostList/PostListSettings";
 import {PostListSearch} from "@/store/modules/PostList/PostListSearch";
@@ -6,11 +7,7 @@ import {PostListSort} from "@/store/modules/PostList/PostListSort";
 import {PostListPagination} from "@/store/modules/PostList/PostListPagination";
 import {PostListItem} from "@/store/modules/PostList/PostListItem";
 
-import {usePosts} from "@/hooks/PostList/usePosts";
-import {usePageHook} from "@/hooks/PostList/Page/usePageHook";
-import {usePaginationHook} from "@/hooks/PostList/Page/usePaginationHook";
-
-import {useScrollPage} from "@/hooks/PostList/Page/Event/useScrollPage";
+import {useScrollPageHook} from "@/hooks/PostList/Page/Event/useScrollPageHook";
 import {useChangePage} from "@/hooks/PostList/Page/Event/useChangePage";
 
 export const PostList = {
@@ -60,23 +57,16 @@ export const PostList = {
     },
     actions: {
         async fetchPosts({state}) {
-            // 1. Initialize the store post list hook instance
-            return usePosts(state.pagination.page, state.pagination.limit);
-        },
-        async loadPage({state, commit, dispatch}) {
-            // 1. Initialize the store post list page hook instance
-            await usePageHook({commit, dispatch});
-
-            // 2. Initialize the store post list pagination hook instance
-            usePaginationHook({state, commit});
+            return await axios.get('https://jsonplaceholder.typicode.com/posts', {
+                params: {
+                    _page: state.pagination.page,
+                    _limit: state.pagination.limit
+                }
+            });
         },
         async changePage({commit, dispatch}, page) {
             // 1. Initialize the store change post list page hook instance
             await useChangePage({commit, dispatch}, page);
-        },
-        async scrollPage({getters, commit, dispatch}) {
-            // 1. Initialize the store scroll post list page hook instance
-            await useScrollPage({getters, commit, dispatch});
         },
     },
     namespaced: true

@@ -1,7 +1,7 @@
 export const PostListSettings = {
     state: () => ({
         loading: true,
-        sentinel: false
+        sentinel: true
     }),
     mutations: {
         setLoading(state, loading) {

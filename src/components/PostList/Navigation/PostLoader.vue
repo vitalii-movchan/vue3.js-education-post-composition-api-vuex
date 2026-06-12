@@ -1,6 +1,8 @@
 <script>
 import {useStore} from "vuex";
 
+import {useScrollPageHook} from "@/hooks/PostList/Page/Event/useScrollPageHook";
+
 export default {
   name: "post-loader",
   setup() {
@@ -8,12 +10,10 @@ export default {
     const store = useStore();
 
     // 2. Methods to trigger Mutations and Actions
-    const scrollPage = () => {
-      store.dispatch('post_list/scrollPage', null, {root: true}) // Dispatches an action
-    }
+    const {useScrollPage} = useScrollPageHook(store);
 
     return {
-      scrollPage
+      useScrollPage
     }
   }
 }
@@ -22,7 +22,7 @@ export default {
 <template>
   <div id="post-loader">
     <!-- End PostList Loader (Sentinel Mode) -->
-    <div v-intersection="scrollPage" class="observer"/>
+    <div v-intersection="useScrollPage" class="observer"/>
     <!-- End PostList Loader -->
   </div>
 </template>
