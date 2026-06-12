@@ -1,5 +1,4 @@
 export async function useChangePage({commit, dispatch}, page) {
-
     commit('settings/setLoading', true);
 
     try {
