@@ -1,5 +1,4 @@
 // store/modules/PostModule.js
-import axios from "axios";
 
 import {PostListSettings} from "@/store/modules/PostList/PostListSettings";
 import {PostListSearch} from "@/store/modules/PostList/PostListSearch";
@@ -7,12 +6,13 @@ import {PostListSort} from "@/store/modules/PostList/PostListSort";
 import {PostListPagination} from "@/store/modules/PostList/PostListPagination";
 import {PostListItem} from "@/store/modules/PostList/PostListItem";
 
-import {usePage} from "@/hooks/PostList/usePage";
-import {usePagination} from "@/hooks/PostList/usePagination";
-import {useScrollPage} from "@/hooks/PostList/useScrollPage";
-import {useChangePage} from "@/hooks/PostList/useChangePage";
 import {usePosts} from "@/hooks/PostList/usePosts";
 
+import {usePage} from "@/hooks/PostList/Page/usePage";
+import {usePagination} from "@/hooks/PostList/Page/usePagination";
+
+import {useScrollPage} from "@/hooks/PostList/Page/Event/useScrollPage";
+import {useChangePage} from "@/hooks/PostList/Page/Event/useChangePage";
 
 export const PostList = {
     modules: {
