@@ -7,6 +7,13 @@ import {PostListSort} from "@/store/modules/PostList/PostListSort";
 import {PostListPagination} from "@/store/modules/PostList/PostListPagination";
 import {PostListItem} from "@/store/modules/PostList/PostListItem";
 
+import {usePage} from "@/hooks/PostList/usePage";
+import {usePagination} from "@/hooks/PostList/usePagination";
+import {useScrollPage} from "@/hooks/PostList/useScrollPage";
+import {useChangePage} from "@/hooks/PostList/useChangePage";
+import {usePosts} from "@/hooks/PostList/usePosts";
+
+
 export const PostList = {
     modules: {
         settings: PostListSettings, // Nest the settings module inside the post list module
@@ -42,71 +49,34 @@ export const PostList = {
         }
     },
     mutations: {
+        addPosts(state, posts) {
+            state.posts = [...state.posts, ...posts];
+        },
         setPosts(state, posts) {
             state.posts = posts;
         },
         setTotal(state, total) {
             state.total = total;
-        },
+        }
     },
     actions: {
         async fetchPosts({state}) {
-            return await axios.get('https://jsonplaceholder.typicode.com/posts', {
-                params: {
-                    _page: state.pagination.page,
-                    _limit: state.pagination.limit
-                }
-            });
+            return usePosts(state.pagination.page, state.pagination.limit);
         },
         async loadPage({state, commit, dispatch}) {
-            commit('post_list/settings/setLoading', true, {root: true});
+            // 1. Initialize the store post list hook instance
+            await usePage({commit, dispatch});
 
-            try {
-                const response = await dispatch('fetchPosts');
-
-                commit('setPosts', response.data);
-                commit('setTotal', response.headers['x-total-count']);
-
-                commit('pagination/setPages', Math.ceil(state.total / state.pagination.limit))
-            } catch (exception) {
-                alert(exception);
-            } finally {
-                commit('post_list/settings/setLoading', false, {root: true});
-            }
-        },
-        addPosts({state}, posts) {
-            state.posts = [...state.posts, ...posts];
-        },
-        hasMorePosts({state}) {
-            return state.pagination.page < state.pagination.pages;
+            // 2. Initialize the store post pagination hook instance
+            usePagination({state, commit});
         },
         async changePage({commit, dispatch}, page) {
-            commit('post_list/settings/setLoading', true, {root: true});
-
-            try {
-                commit('pagination/setPage', page)
-
-                const response = await dispatch('fetchPosts');
-
-                commit('setPosts', response.data);
-            } catch (exception) {
-                alert(exception);
-            } finally {
-                commit('post_list/settings/setLoading', false, {root: true});
-            }
+            // 1. Initialize the store change page hook instance
+            await useChangePage({commit, dispatch}, page);
         },
-        async scrollPage({state, commit, dispatch}) {
-            if (dispatch('hasMorePosts') === false) return;
-
-            try {
-                commit('pagination/setPage', state.pagination.page += 1)
-
-                const response = await dispatch('fetchPosts');
-
-                dispatch('addPosts', response.data);
-            } catch (exception) {
-                alert(exception);
-            }
+        async scrollPage({getters, commit, dispatch}) {
+            // 1. Initialize the store scroll page hook instance
+            await useScrollPage({getters, commit, dispatch});
         },
     },
     namespaced: true

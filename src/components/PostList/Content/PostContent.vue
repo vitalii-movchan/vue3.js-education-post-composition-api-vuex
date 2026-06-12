@@ -1,5 +1,5 @@
 <script>
-import PostList from "@/components/Post/Content/PostList.vue";
+import PostList from "@/components/PostList/Content/PostList.vue";
 
 import {useStore} from "vuex";
 import {computed} from "vue";

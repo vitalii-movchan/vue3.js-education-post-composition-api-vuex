@@ -1,8 +1,8 @@
 <script setup>
 
-import PostCreateButton from "@/components/Post/Toolbar/PostCreateButton.vue";
-import PostSortList from "@/components/Post/Toolbar/PostSortList.vue";
-import PostSearchInput from "@/components/Post/Toolbar/PostSearchInput.vue";
+import PostCreateButton from "@/components/PostList/Toolbar/PostCreateButton.vue";
+import PostSortList from "@/components/PostList/Toolbar/PostSortList.vue";
+import PostSearchInput from "@/components/PostList/Toolbar/PostSearchInput.vue";
 
 </script>
 

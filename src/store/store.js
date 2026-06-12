@@ -1,16 +1,16 @@
 import {createStore} from "vuex";
 
 
-// Post List
+// PostList List
 import {PostList} from "@/store/modules/PostList/PostList"
 
-// Post
+// PostList
 import {PostRouter} from "@/store/modules/PostList/PostRouter"
 
 export default createStore({
     modules: {
 
-        // Post
+        // PostList
         post_router: PostRouter,
         post_list: PostList,
     }

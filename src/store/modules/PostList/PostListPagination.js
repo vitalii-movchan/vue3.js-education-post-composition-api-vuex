@@ -11,6 +11,14 @@ export const PostListPagination = {
         setPages(state, pages) {
             state.pages = pages;
         },
+        incrementPage(state) {
+            state.pages++;
+        }
+    },
+    getters: {
+        hasMore(state) {
+            return state.page < state.pages;
+        },
     },
     namespaced: true
 }

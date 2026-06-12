@@ -3,7 +3,7 @@
 import {reactive} from "vue";
 import {useDialogFactory} from "@/composables/UI/useDialogFactory";
 
-import PostCreateForm from "@/components/Post/Toolbar/PostCreateForm.vue";
+import PostCreateForm from "@/components/PostList/Toolbar/PostCreateForm.vue";
 
 export default {
   name: "post-create-button",

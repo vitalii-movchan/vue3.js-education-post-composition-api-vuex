@@ -2,8 +2,9 @@
 
 import {useStore} from "vuex";
 
-import PostToolbar from "@/components/Post/Toolbar/PostToolbar.vue";
-import PostContent from "@/components/Post/Content/PostContent.vue";
+import PostToolbar from "@/components/PostList/Toolbar/PostToolbar.vue";
+import PostContent from "@/components/PostList/Content/PostContent.vue";
+
 
 export default {
   name: 'post-list-page',
@@ -11,23 +12,19 @@ export default {
     PostContent, PostToolbar
   },
   setup() {
-    // Initialize the store hook instance
-    // import {usePosts} from "@/hooks/usePosts";
-    // usePosts();
-
     // 1. Initialize the store instance
     const store = useStore()
 
     // 2. Methods to trigger Mutations and Actions
     store.dispatch('post_list/loadPage', {}, {}, {root: true});
-  }
+  },
 }
 
 </script>
 
 <template>
   <div id="posts">
-    <!-- Begin Page (Post) -->
+    <!-- Begin Page (PostList) -->
     <h1>Cтраница с постами</h1>
 
     <post-toolbar/>

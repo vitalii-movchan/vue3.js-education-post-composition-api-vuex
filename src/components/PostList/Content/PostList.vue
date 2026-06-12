@@ -1,6 +1,6 @@
 <script setup>
-import PostItem from "@/components/Post/Content/PostItem.vue";
-import PostNavigation from "@/components/Post/Navigation/PostNavigation.vue";
+import PostItem from "@/components/PostList/Content/PostItem.vue";
+import PostNavigation from "@/components/PostList/Navigation/PostNavigation.vue";
 
 import {useStore} from "vuex";
 import {computed} from "vue";
@@ -14,7 +14,7 @@ const posts = computed(() => store.getters["post_list/posts"]);
 
 <template>
   <div v-if="posts" id="post-list">
-    <!-- Begin Post List (Hidden initially) -->
+    <!-- Begin PostList List (Hidden initially) -->
     <h3>Список постов</h3>
 
     <transition-group name="post-list">
@@ -26,13 +26,13 @@ const posts = computed(() => store.getters["post_list/posts"]);
     </transition-group>
 
     <post-navigation/>
-    <!-- End Post List -->
+    <!-- End PostList List -->
   </div>
 
   <div v-else>
-    <!-- Begin Empty Post List (Hidden initially) -->
+    <!-- Begin Empty PostList List (Hidden initially) -->
     <h2>Список постов пуст</h2>
-    <!-- End Empty Post List -->
+    <!-- End Empty PostList List -->
   </div>
 
 </template>
