@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export async function usePosts(page, limit) {
+export async function usePosts({state}) {
     return await axios.get('https://jsonplaceholder.typicode.com/posts', {
         params: {
-            _page: page,
-            _limit: limit
+            _page: state.pagination.page,
+            _limit: state.pagination.limit
         }
     });
 }

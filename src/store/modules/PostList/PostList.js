@@ -62,7 +62,7 @@ export const PostList = {
     actions: {
         async fetchPosts({state}) {
             // 1. Initialize the store post list hook instance
-            return usePosts(state.pagination.page, state.pagination.limit);
+            return usePosts({state});
         },
         async loadPage({state, commit, dispatch}) {
             // 1. Initialize the store post list page hook instance
